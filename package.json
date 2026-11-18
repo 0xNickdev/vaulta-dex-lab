@@ -1,0 +1,19 @@
+{
+  "name": "vaulta-dex-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Learning lab: writing, testing and attacking C++ smart contracts for Vaulta (Antelope)",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "bash scripts/build.sh",
+    "test": "node scripts/check-build.mjs && node --test tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "@vaulta/vert": "2.1.1",
+    "fast-check": "4.10.2"
+  }
+}
