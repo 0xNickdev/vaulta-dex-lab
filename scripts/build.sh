@@ -31,6 +31,7 @@ SOURCES=(
   contracts/token/token.cpp
   contracts/vault/vault.cpp
 )
+shopt -s nullglob
 for f in "$ROOT"/contracts/vulnerable/*.cpp; do
   SOURCES+=("contracts/vulnerable/$(basename "$f")")
 done
@@ -41,7 +42,7 @@ CMDS="set -e; cdt-cpp --version;"
 for src in "${SOURCES[@]}"; do
   name="$(basename "$src" .cpp)"
   CMDS+=" echo '==> $name'; mkdir -p build/$name;"
-  CMDS+=" cdt-cpp -abigen -contract $name -o build/$name/$name.wasm $src;"
+  CMDS+=" cdt-cpp -abigen --no-missing-ricardian-clause -contract $name -o build/$name/$name.wasm $src;"
 done
 
 rm -rf "$ROOT/build"
