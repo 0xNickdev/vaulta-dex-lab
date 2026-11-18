@@ -483,6 +483,8 @@ private:
 
       const extended_asset& in_side  = a_in ? p->reserve_a : p->reserve_b;
       const extended_asset& out_side = a_in ? p->reserve_b : p->reserve_a;
+      // The reserves come from OUR table, never from the real token balance:
+      // the balance also holds other users' pending deposits.
       const int64_t reserve_in  = in_side.quantity.amount;
       const int64_t reserve_out = out_side.quantity.amount;
 
@@ -508,8 +510,8 @@ private:
 
       // Update our own books first, pay second (checks-effects-interactions).
       pools.modify(p, same_payer, [&](auto& row) {
-         (a_in ? row.reserve_a : row.reserve_b).quantity.amount += amount_in;
-         (a_in ? row.reserve_b : row.reserve_a).quantity.amount -= out;
+         (a_in ? row.reserve_a : row.reserve_b).quantity.amount = reserve_in + amount_in;
+         (a_in ? row.reserve_b : row.reserve_a).quantity.amount = reserve_out - out;
       });
 
       pay(from, extended_asset(out, out_side.get_extended_symbol()), "pool swap");

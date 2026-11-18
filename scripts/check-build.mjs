@@ -14,6 +14,10 @@ const REQUIRED = [
   'vault_no_to_check',
   'vault_no_auth',
   'forwarder',
+  'pool_no_min_out',
+  'pool_round_up',
+  'pool_no_min_liquidity',
+  'pool_balance_reserves',
 ];
 
 const missing = [];
