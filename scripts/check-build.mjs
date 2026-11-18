@@ -9,6 +9,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const REQUIRED = [
   'token',
   'vault',
+  'pool',
   'vault_no_first_receiver',
   'vault_no_to_check',
   'vault_no_auth',

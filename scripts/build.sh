@@ -30,6 +30,7 @@ fi
 SOURCES=(
   contracts/token/token.cpp
   contracts/vault/vault.cpp
+  contracts/pool/pool.cpp
 )
 shopt -s nullglob
 for f in "$ROOT"/contracts/vulnerable/*.cpp; do
